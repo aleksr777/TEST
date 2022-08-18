@@ -8,27 +8,27 @@ const buttonRightSpecProjects = document.querySelector('.spec-projects__button-r
 
 
 /* Для слайдера */
-
-buttonLeftSpecProjects.addEventListener('click', () => {
-  buttonRightSpecProjects.removeAttribute('disabled');
+buttonLeftSpecProjects.setAttribute('disabled', 'disabled');
+buttonRightSpecProjects.addEventListener('click', () => {
+  buttonLeftSpecProjects.removeAttribute('disabled');
   offset = offset + fotoSpecProjects.clientWidth;
   if (offset > (sliderLine.clientWidth - fotoSpecProjects.clientWidth)) {
     offset = sliderLine.clientWidth - fotoSpecProjects.clientWidth;
   }
   sliderLine.style.left = -offset + 'px';
   if (offset > (sliderLine.clientWidth - (2 * fotoSpecProjects.clientWidth))) {
-    buttonLeftSpecProjects.setAttribute('disabled', 'disabled');
+    buttonRightSpecProjects.setAttribute('disabled', 'disabled');
   }
 });
 
-buttonRightSpecProjects.addEventListener('click', () => {
-  buttonLeftSpecProjects.removeAttribute('disabled');
+buttonLeftSpecProjects.addEventListener('click', () => {
+  buttonRightSpecProjects.removeAttribute('disabled');
   offset = offset - fotoSpecProjects.clientWidth;
   if (offset < 0) {
     offset = 0
   }
   if (offset < fotoSpecProjects.clientWidth) {
-    buttonRightSpecProjects.setAttribute('disabled', 'disabled');
+    buttonLeftSpecProjects.setAttribute('disabled', 'disabled');
   }
   sliderLine.style.left = -offset + 'px';
   sliderLine.clientWidth;
