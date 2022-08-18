@@ -6,34 +6,41 @@ const fotoSpecProjects = document.querySelector('.spec-projects__foto');
 const buttonLeftSpecProjects = document.querySelector('.spec-projects__button-left');
 const buttonRightSpecProjects = document.querySelector('.spec-projects__button-right');
 
-
 /* Для слайдера */
-buttonLeftSpecProjects.setAttribute('disabled', 'disabled');
-buttonRightSpecProjects.addEventListener('click', () => {
-  buttonLeftSpecProjects.removeAttribute('disabled');
-  offset = offset + fotoSpecProjects.clientWidth;
-  if (offset > (sliderLine.clientWidth - fotoSpecProjects.clientWidth)) {
-    offset = sliderLine.clientWidth - fotoSpecProjects.clientWidth;
-  }
-  sliderLine.style.left = -offset + 'px';
-  if (offset > (sliderLine.clientWidth - (2 * fotoSpecProjects.clientWidth))) {
-    buttonRightSpecProjects.setAttribute('disabled', 'disabled');
-  }
-});
-
-buttonLeftSpecProjects.addEventListener('click', () => {
-  buttonRightSpecProjects.removeAttribute('disabled');
-  offset = offset - fotoSpecProjects.clientWidth;
+const slidePictureLeft = (line, foto, btnLeft, btnRight) => {
+  btnRight.removeAttribute('disabled');
+  offset = offset - foto.clientWidth;
   if (offset < 0) {
     offset = 0
   }
-  if (offset < fotoSpecProjects.clientWidth) {
-    buttonLeftSpecProjects.setAttribute('disabled', 'disabled');
+  if (offset < foto.clientWidth) {
+    btnLeft.setAttribute('disabled', 'disabled');
   }
-  sliderLine.style.left = -offset + 'px';
-  sliderLine.clientWidth;
+  line.style.left = -offset + 'px';
+  line.clientWidth;
+};
+
+const slidePictureRight = (line, foto, btnLeft, btnRight) => {
+  btnLeft.removeAttribute('disabled');
+  offset = offset + foto.clientWidth;
+  if (offset > (line.clientWidth - foto.clientWidth)) {
+    offset = line.clientWidth - foto.clientWidth;
+  }
+  line.style.left = -offset + 'px';
+  if (offset > (line.clientWidth - (2 * foto.clientWidth))) {
+    btnRight.setAttribute('disabled', 'disabled');
+  }
+}
+
+buttonRightSpecProjects.addEventListener('click', () => {
+  slidePictureRight(sliderLine, fotoSpecProjects, buttonLeftSpecProjects, buttonRightSpecProjects);
 });
 
+buttonLeftSpecProjects.addEventListener('click', () => {
+  slidePictureLeft(sliderLine, fotoSpecProjects, buttonLeftSpecProjects, buttonRightSpecProjects);
+});
+
+buttonLeftSpecProjects.setAttribute('disabled', 'disabled');
 
 
 
